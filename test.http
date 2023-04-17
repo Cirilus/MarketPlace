@@ -1,0 +1,37 @@
+### Sign-up
+POST http://localhost:8000/auth/sign-up
+Content-Type: application/json
+
+{
+  "username": "test123",
+  "password": "test123"
+}
+### Sign-in
+POST http://localhost:8000/auth/sign-in
+Content-Type: application/json
+
+{
+"username": "test123",
+"password": "test123"
+}
+
+### Products
+### Create
+POST http://localhost:8000/products
+Content-Type: application/json
+
+{
+  "title": "test",
+  "cost": 123,
+  "description": "test dasdsada",
+  "author": 1,
+  "category": "test cat",
+  "test": "test"
+}
+### GetAll
+GET http://localhost:8000/products
+Content-Type: application/json
+
+### GetOne
+GET http://localhost:8000/products/1
+Content-Type: application/json
