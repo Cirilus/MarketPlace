@@ -1,17 +1,7 @@
-FROM golang:alpine AS builder
+FROM golang:alpine
 
 WORKDIR /build
-
-ADD go.mod .
 
 COPY . .
 
-RUN go build -o main /main.go
-
-FROM alpine
-
-WORKDIR /build
-
-COPY --from=builder /build/cmd/app/main /build/hello
-
-CMD [". /hello"]
+CMD ["go", "run", "cmd/app/main.go"]
