@@ -6,10 +6,10 @@ import (
 	authrepo "CrowdProject/internal/auth/repository/postgres"
 	authusecase "CrowdProject/internal/auth/usecase"
 	"CrowdProject/internal/product"
-
 	producthttp "CrowdProject/internal/product/delivery/http"
 	productrepo "CrowdProject/internal/product/repository/postgres"
 	productusecase "CrowdProject/internal/product/usecase"
+	"github.com/gin-contrib/cors"
 
 	"CrowdProject/internal/config"
 	postgres "CrowdProject/pkg/client/postgresql"
@@ -58,19 +58,24 @@ func NewApp(cfg *config.Config) *App {
 }
 
 func (a *App) Run(port string) error {
-	// Init gin handler
 	router := gin.Default()
 	router.Use(
 		gin.Recovery(),
 		gin.Logger(),
 	)
 
-	// Set up http handlers
-	// SignUp/SignIn endpoints
-	authhttp.RegisterHTTPEndpoints(router, a.authUC)
-	producthttp.RegisterHTTPEndpoints(router, a.productUC)
+	cfg := cors.DefaultConfig()
+	cfg.AllowAllOrigins = true
+	router.Use(cors.New(cfg))
 
-	// HTTP Server
+	authhttp.RegisterHTTPEndpoints(router, a.authUC)
+
+	authMiddleware := authhttp.NewAuthMiddleware(a.authUC)
+
+	api := router.Group("/products", authMiddleware)
+
+	producthttp.RegisterHTTPEndpoints(api, a.productUC)
+
 	a.httpServer = &http.Server{
 		Addr:           ":" + port,
 		Handler:        router,

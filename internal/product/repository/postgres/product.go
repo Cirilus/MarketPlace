@@ -17,6 +17,7 @@ func NewRepository(db *postgres.Postgres) *ProductRepository {
 }
 
 func (p ProductRepository) CreateProduct(ctx context.Context, product *models.Product) error {
+	logrus.Info("Create Sql query")
 	sql, args, err := p.Builder.
 		Insert("product").
 		Columns("title, cost, description, author_id, category, rate").
@@ -38,6 +39,7 @@ func (p ProductRepository) CreateProduct(ctx context.Context, product *models.Pr
 }
 
 func (p ProductRepository) GetDetailProduct(ctx context.Context, id string) (*models.Product, error) {
+	logrus.Info("Create Sql query")
 	sql, args, err := p.Builder.
 		Select("product_id, title, cost, Description, a.username, category, rate").
 		Where(squirrel.Eq{"product_id": id}).
@@ -64,6 +66,7 @@ func (p ProductRepository) GetDetailProduct(ctx context.Context, id string) (*mo
 }
 
 func (p ProductRepository) GetAllProducts(ctx context.Context) ([]models.Product, error) {
+	logrus.Info("Create Sql query")
 	sql, args, err := p.Builder.
 		Select("product_id, title, cost, author_id, category, rate").
 		From("product").

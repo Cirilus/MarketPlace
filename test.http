@@ -3,9 +3,10 @@ POST http://localhost:8000/auth/sign-up
 Content-Type: application/json
 
 {
-  "username": "test123",
-  "password": "test123"
+  "username": "test1234",
+  "password": "test1234"
 }
+
 ### Sign-in
 POST http://localhost:8000/auth/sign-in
 Content-Type: application/json
@@ -19,19 +20,23 @@ Content-Type: application/json
 ### Create
 POST http://localhost:8000/products
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODE5MjA3MjMuMDI5MjMxLCJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InRlc3QxMjMiLCJwYXNzd29yZCI6IjE2M2E4NmQ3OWM5MzlmZWUxN2ExODcwYzk1NTViN2Y3YmM5NTg0ZWYifX0.WvJamNhISl3WhsoxPOS5YxW4AHkckrBdO11GULVounQ
 
 {
-  "title": "test",
+  "title": "test123",
   "cost": 123,
   "description": "test dasdsada",
   "author": 1,
   "category": "test cat",
   "test": "test"
 }
+
 ### GetAll
 GET http://localhost:8000/products
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODE5MjA3MjMuMDI5MjMxLCJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InRlc3QxMjMiLCJwYXNzd29yZCI6IjE2M2E4NmQ3OWM5MzlmZWUxN2ExODcwYzk1NTViN2Y3YmM5NTg0ZWYifX0.WvJamNhISl3WhsoxPOS5YxW4AHkckrBdO11GULVounQ
 
 ### GetOne
 GET http://localhost:8000/products/1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODE5MjA3MjMuMDI5MjMxLCJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InRlc3QxMjMiLCJwYXNzd29yZCI6IjE2M2E4NmQ3OWM5MzlmZWUxN2ExODcwYzk1NTViN2Y3YmM5NTg0ZWYifX0.WvJamNhISl3WhsoxPOS5YxW4AHkckrBdO11GULVounQ

@@ -5,14 +5,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func RegisterHTTPEndpoints(router *gin.Engine, uc product.UseCase) {
+func RegisterHTTPEndpoints(router *gin.RouterGroup, uc product.UseCase) {
 	h := NewHandler(uc)
 
-	productEndpoints := router.Group("/products")
-	{
-		productEndpoints.POST("", h.CreateProduct)
-		productEndpoints.GET("", h.GetAllProducts)
-		productEndpoints.GET("/:id", h.GetProduct)
-	}
+	router.POST("", h.CreateProduct)
+	router.GET("", h.GetAllProducts)
+	router.GET("/:id", h.GetProduct)
 
 }

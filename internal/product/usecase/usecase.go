@@ -4,6 +4,7 @@ import (
 	"CrowdProject/internal/models"
 	"CrowdProject/internal/product"
 	"context"
+	"github.com/sirupsen/logrus"
 )
 
 type ProductUseCase struct {
@@ -17,6 +18,7 @@ func NewProductUseCase(repo product.Repository) *ProductUseCase {
 func (p ProductUseCase) CreateProduct(ctx context.Context, product *models.Product) error {
 	err := p.repo.CreateProduct(ctx, product)
 	if err != nil {
+		logrus.Error(err)
 		return err
 	}
 	return nil
@@ -25,6 +27,7 @@ func (p ProductUseCase) CreateProduct(ctx context.Context, product *models.Produ
 func (p ProductUseCase) GetDetailProduct(ctx context.Context, id string) (*models.Product, error) {
 	detailProduct, err := p.repo.GetDetailProduct(ctx, id)
 	if err != nil {
+		logrus.Error(err)
 		return nil, err
 	}
 	return detailProduct, nil
@@ -33,6 +36,7 @@ func (p ProductUseCase) GetDetailProduct(ctx context.Context, id string) (*model
 func (p ProductUseCase) GetAllProducts(ctx context.Context) ([]models.Product, error) {
 	products, err := p.repo.GetAllProducts(ctx)
 	if err != nil {
+		logrus.Error(err)
 		return nil, err
 	}
 	return products, nil
